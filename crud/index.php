@@ -8,24 +8,28 @@
 <body>
 	<div class="box">
 		<h2>Contact Us</h2>
-		<form>
+		<form method="post" action="action.php">
 			<div>
-				<input type="text" name="" required="">
+				<input type="text" name="name" required="">
 				<label>Name</label>
 			</div>
 			<div>
-				<input type="email" name="" required="">
+				<input type="email" name="email" required="">
 				<label>Email</label>	
 			</div>
 			<div>
-				<input type="text" name="" required="">
+				<input type="text" name="subject" required="">
 				<label>Subject</label>	
 			</div>
 			<div>
-				<textarea required=""></textarea>
-				<label>Message</label>
+				<input type="text" name="message" required="">
+				<label>Message</label>	
 			</div>
-			<input type="submit" name="" value="submit">
+			<div>
+				<textarea required="" name="area"></textarea>
+				<label>address</label>
+			</div>
+			<input type="submit" name="submit" value="submit">
 		</form>
 	</div>
 </body>

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div class="sign-up-form">
-		<img src="2.png">
+		<img src="../avatar/2.jpg">
 		<h1>Sign Up Now</h1>
 		<form>
 			<input type="email" class="input-box" placeholder="your email">
