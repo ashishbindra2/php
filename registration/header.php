@@ -27,7 +27,7 @@
 <body class="bg-light">
 	<div class="nav-scroller bg-white shadow-sm">
 		<nav class="nav nav-underline">
-			<a class="nav-link active" href="#">Dashboard</a>
+			<a class="nav-link active" href="home.php">Dashboard</a>
 			<a class="nav-link" href="#">
 				Friends
 				<span class="badge badge-pill bg-light align-text-bottom">27</span>

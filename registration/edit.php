@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Sanitize POST array
   $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
   $data = [
+    'rid' => $_GET['edit'],
     'name' =>  rim($_POST["name"]),
     'email' => rim($_POST["email"]),
     'password' => rim($_POST["password"]),
@@ -22,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'comment' => rim($_POST["comment"]),
     'chosse' => rim($_POST["chosse"]),
     'uni'=> rim($_POST["uni"]),
+    'statu'=>rim($_POST['statu']),
 
     'name_err' =>  '',
     'email_err' => '',
@@ -31,7 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'mobile_err' => '',
     'comment_err' => '',
     'chosse_err' => '',
-    'uni_err'=> ''
+    'uni_err'=> '',
+    'statu_err'=>''
   ];
 
   if (empty($data["name"])) {
@@ -43,6 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($data["mobile"])) {
     $data["mobile_err"] = "mobile number is required";
   }else{
+       if(!empty(findByPhone($data["mobile"],$ro['mobile'])))
+      $data["mobile_err"] = "mobile is already Exisit";
     if(preg_match("/^[0-9]{10}$/", $data["mobile"])) {
     }
     else{
@@ -59,6 +64,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $data["chosse_err"] = "chosse is required";
     } 
   }
+
+  if (empty($data["statu"])) {
+    $data["statu_err"] = "status is required";
+  }else
+   {if($data["statu"] == '') { 
+      $data["statu_err"] = "status is required";
+    }
+  }
   if (empty($data["uni"])) {
     $data["uni_err"] = "institute_name is required";
   }
@@ -68,6 +81,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL))
       $data["email_err"] = "Invalid email format";
+      if(!empty(findByEmail($data["email"],$ro['email'])))
+      $data["email_err"] = "email is already Exisit";
   }
             // Validate Password
   if (empty($data['password'])) {
@@ -87,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   if (
     empty($data['password_err']) && empty($data['uni_err']) && empty($data['chosse_err']) && empty($data['comment_err']) &&  empty($data['email_err']) && empty($data['mobile_err'])  &&
-    empty($data['details_err']) && empty($data['name_err']) 
+    empty($data['details_err']) && empty($data['name_err']) && $data["statu_err"] 
   ) {
                 // Hash Password
     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -110,7 +125,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'comment' => $ro['comment'],
     'chosse' => $ro['choose'],
     'uni'=> $ro['university'],
-
+     'statu'=>$ro['status'],
     'name_err' =>  '',
     'email_err' => '',
     'password_err' => '',
@@ -119,9 +134,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     'mobile_err' => '',
     'comment_err' => '',
     'chosse_err' => '',
-    'uni_err'=> ''
+    'uni_err'=> '',
+    'statu_err'=>''
   ];
-  // view('home', $data);
+  view('edit', $data);
 }
 
 ?>
@@ -151,12 +167,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
           </div>
           <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
               <label>Mobile</label>
               <input id="Mobile" name="Mobile" placeholder="Mobile No." type="text" class="form-control <?php echo (!empty($data['mobile_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['mobile']; ?>">
               <span class="invalid-feedback"><?php echo $data['mobile_err']; ?></span>
             </div>
-            <div class="form-group col-md-6">  
+            <div class="form-group col-md-4">  
             <label>Choose</label>    
               <select id="inputState" name="chosse" class="form-control <?php echo (!empty($data['chosse_err'])) ? 'is-invalid' : ''; ?>">
                 <option selected value="<?php echo (!empty($data['chosse'])) ? $data['chosse'] : '0'; ?>"><?php echo (!empty($data['chosse'])) ? $data['chosse'] : 'Choose'; ?></option>
@@ -167,13 +183,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </select> 
               <span class="invalid-feedback"><?php echo $data['chosse_err']; ?></span>
             </div>
+             <div class="form-group col-md-4">  
+            <label>Status</label>    
+              <select id="input" name="statu" class="form-control <?php echo (!empty($data['statu_err'])) ? 'is-invalid' : ''; ?>">
+                <option selected value="<?php echo ($data['statu']=='1') ? 'accept' : 'reject'; ?>">
+                  <?php if(isset($data['statu']))
+                   echo ($data['statu']=='1') ? 'Accept' : 'reject';
+                   else
+                     echo "no string";
+                    ?></option>
+                <option value = '1'> Accept</option>
+                <option value = '0'> Reject</option>
+              </select> 
+              <span class="invalid-feedback"><?php echo $data['statu_err']; ?></span>
+            </div> </div>
             <div class="form-group col-md-12">
               <label>comment</label>
               <textarea id="comment" name="comment" cols="40" rows="3" class="form-control <?php echo (!empty($data['comment_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['comment']; ?>">
                 <?php echo $data['comment']; ?>
               </textarea><span class="invalid-feedback"><?php echo $data['comment_err']; ?></span>
             </div>
-          </div>
+         
           <div class="form-row">
             <div class="form-group col-md-6">University</label>
               <input id="Full Name" name="uni" placeholder="University" type="text" class="form-control <?php echo (!empty($data['uni_err'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['uni']; ?>">

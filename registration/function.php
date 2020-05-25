@@ -1,5 +1,74 @@
 
 <?php
+// list of  id 
+function selectID($email){
+  global $conn;
+  $statement = $conn->prepare("SELECT * FROM registration WHERE email = '$email'");        
+  $statement->execute();
+$ro =$statement->fetch();
+   if (isset($ro)) {
+            return $ro;
+        } else {
+            return false;
+        }
+}
+function findUserByPhone($mobile){
+    global $conn;
+    $statement = $conn->prepare('SELECT * FROM registration WHERE mobile = "'.$mobile .'"');        
+       $statement->execute();
+       $ro =$statement->fetchAll();
+       return $ro ;
+   if (isset($ro)) {
+            return $ro;
+        } else {
+            return false;
+        }
+  }
+  function findByPhone($mobile,$phone){
+    global $conn;
+    $statement = $conn->prepare("SELECT * FROM registration WHERE mobile = :mobile AND mobile != :phone");        
+           $statement->bindParam(':mobile',$mobile);
+    $statement->bindParam(':phone',$phone);
+       $statement->execute();
+       $ro =$statement->fetchAll();
+       return $ro ;
+   if (isset($ro)) {
+            return $ro;
+        } else {
+            return false;
+        }
+  }
+  // Find user by email
+   function findUserByEmail($email)
+    {
+        global $conn;
+    $statement = $conn->prepare('SELECT * FROM registration WHERE email = "'.$email.'"');        
+       $statement->execute();
+       $ro =$statement->fetchAll();
+       return $ro ;
+   if (isset($ro)) {
+            return $ro;
+        } else {
+            return false;
+        }
+    }
+      // Find user by email
+   function findByEmail($email,$id)
+    {
+        global $conn;
+    $statement = $conn->prepare("SELECT * FROM  registration WHERE email = :email AND email != :id"); 
+    $statement->bindParam(':email',$email);
+    $statement->bindParam(':id',$id);
+       $statement->execute();
+       $ro =$statement->fetch();
+       return $ro ;
+   if (isset($ro)) {
+            return $ro;
+        } else {
+            return false;
+        }
+    }
+
 // to edit the register user
 function editUser($id){
    global $conn;
@@ -11,11 +80,12 @@ function editUser($id){
 // list of registered user
 function selectAll(){
   global $conn;
-  $statement = $conn->prepare("SELECT * FROM registration ");
+  $statement = $conn->prepare("SELECT * FROM registration order by rid DESC ");
   $statement->execute();
   $row = $statement->fetchAll();
   return $row;
 }
+
 // helps to delete user
 function deleteUser($id){
    global $conn;
@@ -29,17 +99,19 @@ function deleteUser($id){
 function updateData($data)
 {
    global $conn;
-  $statement = $conn->prepare('UPDATE registration SET name = :name,email = :email,mobile = :mobile,choose = :choose,comment =  :comment,university = :uni,details = :detail,password = :pass');
+  $statement = $conn->prepare('UPDATE registration SET name = :name,email = :email,mobile = :mobile,choose = :choose,comment =  :comment,university = :uni,details = :detail,password = :pass,status = :statu Where rid = :rid' );
 
   return $statement->execute([
+      'rid' => $data['rid'],
     'name' => $data['name'],
     'email' => $data['email'],
-    'mobile' => $data['mobile'],
+    'mobile' => $data["mobile"],
     'choose' => $data['chosse'],
     'comment' => $data['comment'],
     'uni' => $data['uni'],
     'detail' => $data['details'],
-    'pass' => $data['password']
+    'pass' => $data['password'],
+    'statu'=>$data['statu']
   ]);
 
 }

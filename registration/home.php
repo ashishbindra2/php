@@ -1,9 +1,11 @@
 
 <?php 
+session_start();
 include('db.php'); //database connection
 include('function.php'); //all function 
 include('header.php'); // header of the page
-
+if(empty($_SESSION['rid']))
+	header(	'location:index.php');
 $row = selectAll(); //fetch  the detail of all user
 if (isset($_GET['del'])) { // delete condition check need to improve
 	$id = $_GET['del']; //get the query string
@@ -14,10 +16,11 @@ if (isset($_GET['del'])) { // delete condition check need to improve
 <main role="main" class="container">
 	<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
 		<img class="mr-3" src="../../assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
-		<div class="lh-100">
+		<div class="lh-90 col-md-10">
 			<h6 class="mb-0 text-white lh-100">List of registration people</h6> <!-- it can be customize  -->
 			<small>Since 2011</small>
 		</div>
+		<div class="pull-right  col-md-2"><a href="logout.php"> logout</a></div>
 	</div>
 
 	<div class="my-3 p-3 bg-white rounded shadow-sm">
@@ -34,24 +37,30 @@ if (isset($_GET['del'])) { // delete condition check need to improve
 							<th>      Comment   </th>
 							<th>      Details   </th>
 							<th>      University</th>
+							<th>      Phone</th>
 							<th>      Status    </th>
 							<th style="width: 12%">   </th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-						if(isset($row)): 
+						if(isset($row)): $q=1;
 							foreach($row as $r):?>
 								<tr>
-									<td> # </td>
+									<td> <?php echo $q."."; ?> </td>
 									<td><?php echo $r['name'];?></td>
 									<td><?php echo $r['email'];?></td>
 									<td><?php echo $r['choose'];?></td>
 									<td><?php echo $r['comment'];?></td>
 									<td><?php echo $r['details'];?></td>
 									<td><?php echo $r['university'];?></td>
+									<td><?php echo $r['mobile'];?></td>
 									<td class="project-state">
+										<?php if($r['status']=='1'){ ?>
 										<span class="badge badge-success">Success</span>
+										<?php }else{?>
+										<span class="badge badge-danger">Reject</span>
+										<?php }?>
 									</td>
 									<td class="project-actions text-right">
 										<button class="btn btn-info btn-sm">
@@ -64,7 +73,7 @@ if (isset($_GET['del'])) { // delete condition check need to improve
 											<i class="fas fa-trash"></i>   Delete	</a> </button> 
 									</td>
 								</tr>
-							<?php  endforeach;
+							<?php $q++; endforeach;
 						endif; ?>
 					</tbody>
 				</table>

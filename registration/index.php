@@ -35,6 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($data["mobile"])) {
     $data["mobile_err"] = "mobile number is required";
   }else{
+      if(!empty(findUserByPhone($data["mobile"])))
+      $data["mobile_err"] = "mobile is already Exisit";
     if(preg_match("/^[0-9]{10}$/", $data["mobile"])) {
     }
     else{
@@ -60,6 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     if (!filter_var($data["email"], FILTER_VALIDATE_EMAIL))
       $data["email_err"] = "Invalid email format";
+    if(!empty(findUserByEmail($data["email"])))
+      $data["email_err"] = "email is already Exisit";
   }
             // Validate Password
   if (empty($data['password'])) {
@@ -78,16 +82,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (
-    empty($data['password_err']) && empty($data['uni_err']) && empty($data['chosse_err']) && empty($data['comment_err']) &&  empty($data['email_err']) && empty($data['mobile_err'])  && empty($data['confirm_password'] &&
-    empty($data['details_err']) && empty($data['name_err']) 
+       empty($data['password_err']) && empty($data['uni_err']) && empty($data['chosse_err']) && empty($data['comment_err'])&&  empty($data['email_err']) && empty($data['mobile_err'])  && empty($data['confirm_password_err']) && empty($data['details_err']) && empty($data['name_err']) 
   ) {
                 // Hash Password
     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
     if (insertData($data)) {
-      header('location:home.php');
+      session_start();
+     $S =  selectID($data["email"]);
+      $_SESSION['rid'] = $S['rid'];
+      $_SESSION['name'] = $S['name'];
+      header('location:home.php?id='.$_SESSION['rid']);
     } else {
-      die('Something went wrong');
+      // die('Something went wrong');
     }
+    //}
+    //sumit error
+    //phone
+    //update detail
   } else {
     view('index', $data);
   }
@@ -115,6 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   ];
   view('index', $data);
 }
+  
 ?>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
