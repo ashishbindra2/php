@@ -45,6 +45,57 @@ header nav ul li a.active{
     color: #fff;
     background: olivedrab;
  }
+
+
+ /* copy data from secnd menu */
+ 
+.sub-menu-1{
+    display: none;
+    }
+    header nav ul li:hover .sub-menu-1{
+        display: block;
+        position: absolute;
+        background: #262626;
+        /* margin-top: 15px; */
+        margin-left: 15px;
+    }
+    header nav ul li:hover .sub-menu-1 ul{
+        display: block;
+        margin: 1px;
+    }
+    header nav ul li:hover .sub-menu-1 ul li{
+    /* width: 150px; */
+    /* padding: 10px; */
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+    }
+    header nav ul li:hover .sub-menu-1 ul li:last-child{
+    border-bottom: none;
+    }
+    header nav ul li:hover .sub-menu-1 ul li a:hover{
+    color: olivedrab;
+    color: #fff;
+
+    }
+    .fa-angle-right{
+        float: right;
+        color: #fff;
+        margin-top:0;
+    }
+    .sub-menu-2{
+        display: none;
+    }
+    
+    .hover-me:hover .sub-menu-2{
+        position: absolute;
+        display: block;
+        margin-top:-40px;
+        margin-left: 160px;
+        background: #262626;
+    }
+ /* xcopy data from secnd menu */
 .menu-toggle{
     color: #fff;
     float: right;
@@ -84,5 +135,8 @@ header nav ul li a.active{
     }
     header nav ul a{
         border-bottom: 1px solid rgba(0,0,0,.2);
+    }
+    header nav ul li:hover .sub-menu-1{
+        width: 100%;
     }
 }
