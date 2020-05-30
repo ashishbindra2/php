@@ -25,26 +25,4 @@
 	}
 </style>
 <body class="bg-light">
-	<div class="nav-scroller bg-white shadow-sm">
-		<nav class="nav nav-underline">
-			<a class="nav-link active" href="home.php">Dashboard</a>
-
-		</nav>
-	</div>
-<!--
-registration forn
- -> first nme text
-   L
-   email
-   phone
-   hobys-3 check box min -1
-   gender radio buttion enum f,m
-   dOB -  date
-   submit validate-save detial
-   delete
-   heanlder.php
-   hide fields --add,update,delete--
-varchar255
-dob - date type
-status tiny int bydefault 1
--->
+	
