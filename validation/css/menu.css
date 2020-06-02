@@ -1,0 +1,82 @@
+    /* * {margin: 0px; padding:0px;} */
+
+    body {
+        background: #C6F3B3;
+        margin-top: 0px;
+        padding-top: 0px;
+    }
+
+    #menu-header {
+        width: 100%;
+        margin: 0 auto;
+        position: relative;
+        text-align: center;
+    }
+
+    #headerr {
+        width: 100%;
+        height: auto;
+        background: url(../images/ijoesheaderback-min.png);
+    }
+
+    #log {
+        width: 19%;
+        padding: 0px 0px 0px 0px;
+        vertical-align: bottom;
+        height: auto;
+
+    }
+
+    .top-right {
+        position: absolute;
+        top: 8px;
+        right: 16px;
+
+    }
+
+    #header-text {
+        max-width: 100%;
+        width: 78%;
+        padding: 0px;
+        float: right;
+        /* Center Div */
+        display: block;
+        margin: 0 auto;
+        text-align: right;
+        height: auto;
+        margin-bottom: 1px;
+    }
+
+    .text {
+        font-size: 16px;
+        text-align: right;
+        font-family: Georgia, "Times New Roman", Times, serif;
+        font-weight: bold;
+        margin: 5px;
+        padding: 10px;
+        /* line-height: 170%; */
+        /* font-weight: bold; */
+        margin-right: 2px;
+    }
+
+    @media(max-width:590px) {
+        #headerr {
+            display: none;
+        }
+
+    }
+
+    @media(max-width:720px) {
+        .text {
+            font-size: 10px;
+            padding: 12px;
+        }
+
+    }
+
+    @media(max-width:1080px) {
+        .text {
+            font-size: 14px;
+        }
+
+    }

@@ -1,0 +1,123 @@
+span {
+    color: red;
+    font-size: 24px;
+}
+
+.red {
+    color: red;
+}
+
+h3 {
+    text-align: center;
+    top: 0;
+    margin-top: 0%;
+    font-size: 24px;
+    padding-top: 20px;
+}
+
+section,
+form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+}
+
+table,
+th,
+td {
+    /* border: 1px solid rgb(198, 255, 187); */
+    border-collapse: collapse;
+    text-align: left;
+    margin-bottom: 22px;
+}
+
+/* .his{
+    background: #00bcd4;
+    color: #FFFFFF;
+} */
+h4 {
+    padding: 2px;
+    font-size: 18px
+}
+
+body {
+    margin: 0 auto;
+    padding: 0px;
+    font-family: sans-serif;
+    background: #c6f3b3;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 80%;
+    /* position: relative; */
+    border: 2px solid gray;
+    overflow: hidden;
+    box-shadow: 0 0 6px rgb(83, 80, 76);
+    /* height:auto; */
+}
+
+#contents {
+    margin-top: 0;
+    padding: 20px;
+    width: 100%;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
+    background: white;
+
+}
+
+footer {
+    padding: 10px;
+    margin-top: 0px;
+    color: white;
+    background-color: #e8491d;
+    text-align: center;
+}
+
+.button-c {
+    align-items: center;
+    padding: 20px;
+    margin: 0 auto;
+    margin-left: 45%;
+
+}
+
+input.sub {
+    padding: 10px;
+    background: green;
+    color: honeydew;
+    /* border: 2px solid red; */
+    border-radius: 8px;
+}
+
+a.das {
+    padding: 10px;
+    background: green;
+    color: honeydew;
+    text-decoration: none;
+    /* border: 2px solid red; */
+    border-radius: 8px;
+}
+
+button {
+    padding: 10px;
+    background: green;
+    color: honeydew;
+    /* border: 2px solid red; */
+    border-radius: 8px;
+}
+
+button:hover,
+input.sub:hover,
+a.das:hover {
+    background: greenyellow;
+    color: honeydew;
+    /* border-radius: 25px; */
+
+    box-shadow: 0 0 10px palegreen, 0 0 40px palegreen, 0 0 80px palegreen;
+}

@@ -1,0 +1,98 @@
+body {
+    margin: 0 auto;
+    padding: 0px;
+    font-family: sans-serif;
+    background: #c6f3b3;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 80%;
+    /* position: relative; */
+    border: 2px solid gray;
+    overflow: hidden;
+    box-shadow: 0 0 6px rgb(83, 80, 76);
+    /* height:auto; */
+}
+
+#conts {
+    background-color: whitesmoke;
+    margin: auto;
+    overflow: hidden;
+}
+
+.volume {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 0px;
+}
+
+.adsharch {
+    margin-top: 0;
+    float: right;
+    display: block;
+    /* margin-right: 125px; */
+}
+
+input[type=text] {
+    width: 180px;
+    padding: 10px 20px;
+    margin: 0px 5px;
+    box-sizing: border-box;
+    border: 4px solid #8842d5;
+    border-radius: 5px;
+}
+
+button {
+    width: 122px;
+    padding: 10px;
+}
+
+
+button:hover {
+    border: 1px solid chartreuse;
+}
+
+.blog {
+    padding: 15px;
+    color: white;
+    background: #35434a;
+}
+
+
+.table-box {
+    margin-top: 10px;
+    width: auto;
+    /* background: whitesmoke; */
+    margin: 10px;
+}
+
+table {
+    padding: 10px;
+    width: 100%;
+}
+
+table tr th {
+    font-size: 24px;
+    text-align: left;
+    width: auto;
+    margin: 0;
+    padding: 2px;
+
+}
+
+table tr td {
+    text-align: left;
+    font-size: 18px;
+    width: 22px;
+    text-transform: capitalize;
+    margin: 0;
+}
+
+table tr td :first-letter {
+    text-transform: uppercase
+}

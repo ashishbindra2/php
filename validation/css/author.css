@@ -1,0 +1,149 @@
+html,
+body {
+  background: #c6f3b3;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+main {
+  /* display: flex; */
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid rgb(83, 80, 76);
+  box-shadow: 0 0 30px rgb(83, 80, 76);
+  /* margin-left: 10%; */
+  /* background: blanchedalmond; */
+}
+
+hr {
+  background: whitesmoke;
+}
+
+#conts {
+  background-color: whitesmoke;
+  margin: auto;
+  overflow: hidden;
+}
+
+.blog {
+  padding: 15px;
+  color: white;
+  background: #35434a;
+}
+
+
+.main {
+  float: left;
+  width: 65%;
+}
+
+/* #content_body_inner
+{
+  margin:0;
+  padding: 0;
+  background:rgb(110, 110, 110);
+} */
+.table-box {
+  width: 100%;
+  background: whitesmoke;
+  /* box-shadow: 0 10px 100px rgba(0,0,0,0.5); */
+}
+
+/* table {
+  width: 100%;
+  margin: 20px;
+}
+
+table,
+th,
+td {
+  border-collapse: collapse;
+  text-align: left;
+  width: auto;
+} */
+
+/* th{
+  background: #00bcd4;
+  color: #FFFFFF;
+} */
+
+/* table tr td{
+    font-family:sans-serif;
+    font-size: 2rem;
+    
+    color: white;
+    margin: 0px;
+    padding:0;
+  } */
+aside.right {
+  float: right;
+  margin: 20px;
+
+  text-align: center;
+}
+
+.news_log {
+  background: #FFFFFF;
+  /* width:90%; */
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid rgb(255, 255, 151);
+  margin: 10px;
+  padding: 2px;
+  box-shadow: 0 0 6px rgb(83, 80, 76);
+
+}
+
+.news_log a {
+  text-decoration: none;
+  color: #555555;
+  padding: 0;
+  font-size: 18px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  transition: 0.2s;
+  overflow: hidden;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.news_log :hover {
+  background: palegreen;
+}
+
+.news_log a:hover {
+  color: #255784;
+  background: palegreen;
+  /* border-radius: 3px; */
+  box-shadow: 0 0 10px palegreen, 0 0 40px palegreen, 0 0 80px palegreen;
+  transition-delay: 0.3s;
+}
+
+footer {
+  padding: 20px;
+  margin-top: 0px;
+  color: white;
+  background-color: #e8491d;
+  text-align: center;
+}
+
+@media(max-width:720px) {
+  main {
+    width: 100%;
+  }
+
+  #wrapper,
+  .main {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  aside.right {
+    width: 100%;
+    align-self: auto;
+  }
+
+
+
+}
