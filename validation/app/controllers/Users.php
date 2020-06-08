@@ -5,6 +5,31 @@ class Users extends Controller
   {
     $this->userModel = $this->model('User');
   }
+    public function  verify()
+    {
+        $id =  $_GET["id"];
+        $token =  $_GET["token"];
+
+        $user = $this->userModel->getAuthorById($id);
+        // print_r($user);
+        if (isset($user) && !empty($user->AUTH_ID)) {
+          if (sha1($user->AUTH_ID) ==$token) {
+            if ($this->userModel->activate($id)) {
+             echo "congratulation,your Account acticated. You can login now<br>";
+             redirect('users/signIn');
+            }
+               else{
+                echo "some problem occored. try after some time";
+               }
+          }else{
+            echo "we can not find your detail in your database";
+          }
+        }else{
+          echo "we cant find detail in our database";
+        }
+       
+        $this->view('users/verify');
+    }
    public function  ajaxState()
     {
         $cid =  $_POST["country_id"];
@@ -168,7 +193,7 @@ class Users extends Controller
         setcookie('email', $data['email'], time() + 90 * 90 * 7);
         setcookie('password', $data['password'], time() + 90 * 90 * 7);
       }
-
+$r=isset($_POST['remember'])?1:0;
       // Make sure errors are empty
       if (empty($data['email_err']) && empty($data['password_err'])) {
         // Validated
@@ -177,7 +202,17 @@ class Users extends Controller
 
         if ($loggedInUser) {
           // Create Session
-          $this->createUserSession($loggedInUser);
+          if ($loggedInUser->ACTIVE ==1) {
+            # code...
+            if ($r==1) {
+             setcookie('email', $data['email'], time() + 90 * 90 * 7);
+        setcookie('password', base64_encode($data['password']), time() + 90 * 90 * 7);
+            }
+             $this->createUserSession($loggedInUser);
+          }else{
+             $data['password_err'] = 'You are not activated yet!!';
+          }
+         
         } else {
           $data['password_err'] = 'Password incorrect';
 
@@ -330,21 +365,53 @@ class Users extends Controller
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
 
         // Register User
-       $lastId= $this->userModel->register($data);
-        if (!empty($lastId)) {
-          // $lastId = $this->userModel->lastInsertId();
-          $token = sha1($lastId);
-          $url = APPROOT . '/views/users/register&id='.$lastId.'&token='.$token;
-          $html = '<div>Thanks for registering with localhost. Please click this link to complete your registration:<br>'.$url.'</div>';
-           $dat = [
-        'email' => $data['email'],
-        'sub' => 'Confirm your email',
-        'body' => $html
-      ];if(vmail($dat))
+        if ($this->userModel->register($data)) {
           flash('register_success', 'You are registered and can log in');
-          else
-            flash('register_success', 'mail not send');
-          redirect('users/signIn&id=' . $id);
+          $lastId = $this->userModel->lastInsertId($data);
+          // echo($lastId->AUTH_ID);
+           $token = sha1($lastId->AUTH_ID);
+          $url = URLROOT . 'users/verify&id='.$lastId->AUTH_ID.'&token='.$token;
+          $html = '<div>Thanks for registering with localhost. Please click this link to complete your registration:<br>'.$url.'</div>';
+          
+      
+       require 'vendor/PHP_Email/PHPMailer-master/PHPMailerAutoload.php';
+
+    define("PROJECT_HOME", "http://localhost/phpsamples/");
+
+    define("PORT", "465"); // port number
+    define("MAIL_USERNAME", "testdatabindra@gmail.com"); // smtp usernmae
+    define("MAIL_PASSWORD", "Test@123"); // smtp password
+    define("MAIL_HOST", "smtp.gmail.com"); // smtp host
+    define("MAILER", "smtp");
+    define("SENDER_NAME", "Vishal");
+    define("SERDER_EMAIL", "testdatabindra@gmail.com");
+
+    $mailto = $data['email'];
+    $mailSub = 'Confirm your email';
+    $emailBody = "<p>" . $html . "</p>";
+
+    $mail = new PHPMailer();
+    $mail->IsSmtp();
+    $mail->SMTPDebug = 0;
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = 'ssl';
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 465; //465; // or 587
+    $mail->IsHTML(true);
+    $mail->Username = 'testdatabindra@gmail.com';
+    $mail->Password = 'Test@123';
+    $mail->SetFrom('testdatabindra@gmail.com');
+    $mail->Subject = $mailSub;
+    $mail->Body = $emailBody;
+    $mail->AddAddress($mailto);
+
+    if (!$mail->Send()) {
+        echo "<script> alert('error);</script>";
+    } else {
+        redirect('users/signIn&id=' . $id);
+    }
+          
+          // redirect('users/signIn&id=' . $id);
         } else {
           die('Something went wrong');
         }
@@ -352,6 +419,7 @@ class Users extends Controller
         // Load view with errors
         $this->view('users/register', $data);
       }
+        $this->view('users/register');
     } else {
       // Init data
       $data = [

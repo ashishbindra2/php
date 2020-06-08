@@ -7,33 +7,6 @@ class User
   {
     $this->db = new Database;
   }
-    public function country()
-    {
-        $this->db->query("SELECT * FROM countries WHERE  status = 1 ORDER BY country_name ASC");
-        $results = $this->db->resultSet();
-        return $results;
-    }
-    // public function country($cid)
-    // {
-    //     $this->db->query("SELECT * FROM countries WHERE country_id = :cid AND status = 1 ORDER BY country_name ASC");
-    //     $this->db->bind(':cid', $cid);
-    //     $results = $this->db->resultSet();
-    //     return $results;
-    // }
-    public function  state($cid)
-    {
-        $this->db->query("SELECT * FROM states WHERE country_id = :cid AND status = 1 ORDER BY state_name ASC");
-        $this->db->bind(':cid', $cid);
-        $results = $this->db->resultSet();
-        return $results;
-    }
-    public function  city($sid)
-    {
-        $this->db->query("SELECT * FROM cities WHERE state_id = :sid AND status = 1 ORDER BY city_name ASC");
-        $this->db->bind(':sid', $sid);
-        $results = $this->db->resultSet();
-        return $results;
-    }
   //reset the password
   public function resetPass($data)
   {
@@ -48,6 +21,61 @@ class User
     } else {
       return false;
     }
+  }
+  
+
+    public function country()
+    {
+        $this->db->query("SELECT * FROM countries WHERE  status = 1 ORDER BY country_name ASC");
+        $results = $this->db->resultSet();
+        return $results;
+    }
+    public function getAuthorById($id)     {
+        $this->db->query("SELECT * FROM author_details  WHERE AUTH_ID=:aid");
+        $this->db->bind(':aid', $id);
+        $results = $this->db->single();
+        return $results;
+
+    }
+    
+  public function activate($id)
+  {
+    $this->db->query('UPDATE  author_details SET ACTIVE = 1
+    WHERE AUTH_ID=:aid');
+    // Bind values
+  
+    $this->db->bind(':aid', $id);
+
+    // Execute
+    if ($this->db->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+    public function  state($cid)
+    {
+        $this->db->query("SELECT * FROM states WHERE country_id = :cid AND status = 1 ORDER BY state_name ASC");
+        $this->db->bind(':cid', $cid);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+    public function  city($sid)
+    {
+        $this->db->query("SELECT * FROM cities WHERE state_id = :sid AND status = 1 ORDER BY city_name ASC");
+        $this->db->bind(':sid', $sid);
+        $results = $this->db->resultSet();
+        return $results;
+    }
+  //Journals Fields
+  public function lastInsertId($data)
+  {
+    $this->db->query('SELECT AUTH_ID FROM author_details WHERE EMAIL = :email');
+    $this->db->bind(':email', $data['email']);
+
+    $row = $this->db->single();
+
+    return $row;
   }
   //Journals Fields
   public function getJournalsById($id)
@@ -84,8 +112,7 @@ class User
 
     // Execute
     if ($this->db->execute()) {
-      return $this->db->lastInsertId();
-        
+      return true;
     } else {
       return false;
     }

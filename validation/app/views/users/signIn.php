@@ -7,7 +7,7 @@
         <div class="card card-body bg-light mt-5 mb-4">
           <?php flash('register_success'); ?>
           <h2>Author Login</h2>
-          <form method="post" action="<?php echo URLROOT . 'users/signIn&id=' . $data['journalId']->JOURNAL_ID; ?>">
+          <form method="post">
             <div class="imgcontainer">
               <img src="<?php echo IMG . '/logo_icon-min.png' ?>" alt="Avatar" class="avatar featurette-image img-fluid mx-auto">
             </div>
@@ -32,7 +32,7 @@
             </div>
             <div class="row">
               <div class="rememberpass col custom-control custom-checkbox ml-3">
-                <input type="checkbox" class="custom-control-input" id="remember" name="remember" onclick="Toggle()">
+                <input type="checkbox" class="custom-control-input" id="remember" name="remember">
                 <label class="custom-control-label" for="remember">Remember me</label>
               </div>
               <!-- <div class="col">
@@ -64,7 +64,7 @@ if (isset($_COOKIE['email']) and isset($_COOKIE['pass'])) {
   $email = $_COOKIE['email'];
   $pass = $_COOKIE['password'];
   echo "<script>
-          document.getElementById('email').value = '$email';
+          document.getElementById('email').value = '".$email."';
           document.getElementById('password').value = '$pass';
           </script>";
 }

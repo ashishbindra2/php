@@ -38,7 +38,7 @@ function vmail($data)
     define("MAIL_HOST", "smtp.gmail.com"); // smtp host
     define("MAILER", "smtp");
     define("SENDER_NAME", "Vishal");
-    define("SERDER_EMAIL", "ashishbindra2@gmail.com");
+    define("SERDER_EMAIL", "testdatabindra@gmail.com");
 
     $mailto = $data['email'];
     $mailSub = $data['sub'];
