@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.7em;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+h1,
+h2,
+h3 {
+    padding-bottom: 20px;
+}
+
+p {
+    margin: 10px 0;
+}
+
+.lead {
+    font-size: 20px;
+}
+
+.bg-dark {
+    background-color: #333;
+    color: #fff;
+}
+
+.text-primary {
+    color: #f7c08a;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 21px;
+    color: #fff;
+    background-color: #333;
+    font-size: large;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-light {
+    background-color: #fff;
+    color: #333;
+}
+
+.btn:hover {
+    background-color: #f7c08a;
+    color: #333;
+}
+
+#nav {
+    background-color: #222;
+    overflow: auto;
+    color: #fff;
+}
+
+nav a {
+    color: #fff;
+}
+
+nav h1 {
+    float: left;
+    padding-top: 20px;
+}
+
+nav ul {
+    float: right;
+    list-style: none;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    padding: 20px;
+    display: block;
+    text-align: center;
+}
+
+nav ul li a:hover,
+nav ul li a.current {
+    background-color: #444;
+    color: #f7c08a;
+}
+
+.continer {
+    max-width: 1080px;
+    margin: auto;
+    padding: 0 20px;
+    overflow: auto;
+}
+
+#show {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('../img/love.jpg') no-repeat center center/cover;
+    height: 600px;
+}
+
+#show .content {
+    padding-top: 100px;
+    text-align: center;
+    color: #fff;
+}
+
+#show .content h1 {
+    line-height: 1.2em;
+    font-size: 60px;
+}
+
+#show .content p {
+    line-height: 1.7em;
+    padding-bottom: 20px;
+}
+
+#home {
+    height: 400px;
+}
+
+#home .info-img {
+    background: url('../img/bag.jpg') no-repeat center center/cover;
+    width: 50%;
+    min-height: 100%;
+    float: left;
+}
+
+#home .info-content {
+    float: right;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+    text-align: center;
+    padding: 50px 30px;
+}
+
+#home .info-content p {
+    padding-bottom: 20px;
+}
+
+.main {
+    height: auto;
+}
+
+.bg-primary {
+    background-color: #f7c08a;
+    color: #fff;
+}
+
+.box {
+    width: 33.2%;
+    float: left;
+    text-align: center;
+    padding: 50px;
+    border: 1px salmon solid;
+}
+
+.cle {
+    clear: both;
+}
+
+#some {
+    background-color: seashell;
+
+    height: 300px;
+}
+
+#some .texts {
+    width: 50%;
+    padding: 20px;
+}
+
+.footers {
+    color: #fff;
+    background-color: #333;
+    text-align: center;
+    padding: 20px;
+}
